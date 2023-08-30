@@ -1,4 +1,9 @@
-export const UserRow = ({ id, username, email, handlerRemoveUser, handlerUserSelectedForm }) => {
+import { useContext } from "react"
+import { NavLink } from "react-router-dom"
+import { UserContext } from "../context/UserContext"
+
+export const UserRow = ({ id, username, email }) => {
+    const { handlerRemoveUser, handlerUserSelectedForm } = useContext(UserContext);
     return (
         <>
             <tr>
@@ -15,6 +20,10 @@ export const UserRow = ({ id, username, email, handlerRemoveUser, handlerUserSel
                             email,
                         })}
                     >editar</button>
+                </td>
+                <td>
+                    <NavLink className={'btn btn-outline-primary btn-sm'}
+                        to={'/users/edit/' + id}>Update link</NavLink>
                 </td>
                 <td>
                     <button

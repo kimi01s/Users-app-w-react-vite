@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import Swal from "sweetalert2";
+import { UserContext } from "../context/UserContext";
 
 
-export const UserForm = ({ handlerAddUser, initialUserForm, userSelected, handlerCloseForm }) => {
+export const UserForm = ({ userSelected, handlerCloseForm }) => {
 
+    const { handlerAddUser, initialUserForm } = useContext(UserContext);
     const [userForm, setUserForm] = useState(initialUserForm);
     const { id, username, password, email } = userForm;
 
@@ -80,13 +82,14 @@ export const UserForm = ({ handlerAddUser, initialUserForm, userSelected, handle
             >
                 {id > 0 ? 'Guardar cambios' : 'Crear'}
             </button>
-            <button
+            {!handlerCloseForm || <button
                 className="btn btn-outline-primary mx-2"
                 type="button"
                 onClick={onCloseForm}
             >
                 Cerrar
-            </button>
+            </button>}
+            
         </form>
     )
 }
